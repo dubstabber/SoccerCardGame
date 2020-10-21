@@ -1,0 +1,11 @@
+{
+  "name": "soccercardgame",
+  "version": "1.0.0",
+  "description": "A soccer themed card game for browsers",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
