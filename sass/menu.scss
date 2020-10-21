@@ -1,0 +1,39 @@
+body {
+    background-image: url('./img/soccer-bg.jpg');
+    //height: 90%;
+}
+ 
+.container {
+    height: 90vh;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.board {
+    display:flex;
+    justify-content: center;
+    flex-direction: column;
+
+    box-sizing: border-box;
+    
+    &__header {
+
+    }
+
+    &__btn {
+        margin: 3px;
+        background-color: greenyellow;
+        padding: 15px;
+        border: 4px solid green;
+        border-radius: 70px;
+        font-size: 36px;
+        color: rgb(4, 36, 3);
+        text-align: center;
+        letter-spacing: 4px;
+
+        &:hover {
+            background-color: green;
+        }
+    }
+}
