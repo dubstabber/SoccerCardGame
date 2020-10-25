@@ -4,7 +4,7 @@
   "description": "A soccer themed card game for browsers",
   "main": "index.html",
   "scripts": {
-    "watch:sass": "node-sass sass/menu.scss ./styles.css -w",
+    "watch:sass": "node-sass sass/main.scss ./styles.css -w",
     "devserver": "live-server",
     "start": "npm-run-all --parallel devserver watch:sass"
   },

@@ -1,3 +1,6 @@
+html {
+  font-size: 62.5%; }
+
 body {
   background-image: url("./img/soccer-bg.jpg"); }
 
@@ -5,7 +8,12 @@ body {
   height: 90vh;
   display: flex;
   justify-content: center;
-  align-items: center; }
+  align-items: center;
+  flex-direction: column; }
+  .container__header {
+    font-size: 7rem;
+    color: #4bce67;
+    margin-top: 0; }
 
 .board {
   display: flex;
@@ -13,14 +21,14 @@ body {
   flex-direction: column;
   box-sizing: border-box; }
   .board__btn {
-    margin: 3px;
-    background-color: greenyellow;
-    padding: 15px;
-    border: 4px solid green;
-    border-radius: 70px;
-    font-size: 36px;
-    color: #042403;
+    margin: 0.3rem;
+    background-color: #c7e979;
+    padding: 1.5rem;
+    border: 0.4rem solid #00330b;
+    border-radius: 7rem;
+    font-size: 3.4rem;
+    color: #10250f;
     text-align: center;
-    letter-spacing: 4px; }
+    letter-spacing: 0.4rem; }
     .board__btn:hover {
       background-color: green; }

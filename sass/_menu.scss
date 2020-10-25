@@ -1,0 +1,38 @@
+.container {
+    height: 90vh;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    &__header {
+        font-size: 7rem;
+        color: $title-color;
+        margin-top: 0;
+        
+    }
+}
+
+.board {
+    display:flex;
+    justify-content: center;
+    flex-direction: column;
+    box-sizing: border-box;
+    
+
+    &__btn {
+        margin: 0.3rem;
+        background-color: $color-primary;
+        padding: 1.5rem;
+        border: 0.4rem solid $color-secondary;
+        border-radius: 7rem;
+        font-size: $font-btn;
+        color: rgb(16, 37, 15);
+        text-align: center;
+        letter-spacing: 0.4rem;
+
+        &:hover {
+            background-color: green;
+        }
+    }
+}
