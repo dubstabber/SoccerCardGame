@@ -14,8 +14,10 @@ const previewAI = $(".board__preview-AI");
 let round = 1;
 let playerScore = 0;
 let AIScore = 0;
+let pause = false;
+let turn;
 
-startBtn.addEventListener("click", startGame);
+$(startBtn).click(startGame);
 
 function startGame() {
     $(startBtn).addClass("hidden");
@@ -27,20 +29,35 @@ function startGame() {
     preview.removeClass("hidden");
 
     title.html("Round "+round);
-    scoreStatus.html("Score: "+playerScore+":"+AIScore);
+    scoreStatus.html("Score  "+playerScore+" : "+AIScore);
     let pick;
     for(let i = 0; i < 10; i++){
         pick = Math.floor(Math.random() * cards.length);
-        AIDeck.append("<img class='card' src='./img/"+cards[pick]+"' id='"+i+"' />");
+        AIDeck.append("<img class='card' src='./img/cardBack.jpg' id='e"+i+"' name='"+pick+"' />");
     }
 
 
     for(let i = 0; i < 10; i++){
         pick = Math.floor(Math.random() * cards.length);
-        playerDeck.append("<img class='card' src='./img/"+cards[pick]+"' id='"+i+"' />");
-    }
+        playerDeck.append("<img class='card' src='./img/"+cards[pick]+"' id='p"+i+"' name='"+pick+"' />")
+        $("#p"+i).click(playerTurn)
 
-    preview.append("<img class='board__preview-player' src='./img/attackBlack.jpg' />");
-    preview.append("<img class='board__preview-AI' src='./img/attackBlack.jpg' />");
-   // enemy.add(img)
+    }
+    turn = Math.floor(Math.random() * 2);
+}
+
+function playerTurn(e){
+    if(turn == 0){
+        console.log("card selected "+e.target.id + " name: " + e.target.name)
+        preview.append("<img class='board__preview-player' src='./img/"+cards[e.target.name]+"' />");
+        $("#"+e.target.id).remove();
+        playerDeck.prop('disabled', true);
+        pause = true;
+        turn = 1;
+        setTimeout(AIturn, 500);
+    }
+}
+
+function AIturn(){
+    console.log("ai move")
 }
