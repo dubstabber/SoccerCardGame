@@ -5,13 +5,19 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Soccer Card Game</title>
         <link rel="stylesheet" href="styles.css">
+        <script src="./src/jquery-3.5.1.min.js"></script>
     </head>
     <body>
         <div class="container">
             <h2 class="container__header">Soccer Card Game</h2>
             <div class="board">
-                <div class="board__btn">START</div> 
-                <div class="board__btn">How to play</div> 
+                <div class="board__msg hidden"></div>
+                <div class="board__score hidden"></div>
+                <div class="board__AI-deck hidden"></div>
+                <div class="board__preview hidden"></div>
+                <div class="board__player-deck hidden"></div>
+                <div class="board__btn">START</div>
+                <div class="board__btn">How to play</div>
             </div>
         </div>
         <script src="./src/index.js"></script>

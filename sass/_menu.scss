@@ -9,8 +9,8 @@
         font-size: 7rem;
         color: $title-color;
         margin-top: 0;
-        
     }
+
 }
 
 .board {
@@ -19,7 +19,6 @@
     flex-direction: column;
     box-sizing: border-box;
     
-
     &__btn {
         margin: 0.3rem;
         background-color: $color-primary;
@@ -35,4 +34,29 @@
             background-color: green;
         }
     }
+    &__score {
+        display: inline-block;
+        margin-right: auto;
+        font-size: 4rem;
+        background-color: $color-secondary;
+        color: $color-primary;
+        margin-top: 0;
+    }
+
+    &__preview {
+        height: 20rem;
+        display: flex;
+        justify-content: center;
+    }
+
+    &__preview-player {
+        align-self: center;
+        margin: 2rem;
+    }
+    &__preview-AI {
+        align-self: center;
+        margin: 2rem;
+    }
+
+
 }

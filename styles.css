@@ -32,3 +32,26 @@ body {
     letter-spacing: 0.4rem; }
     .board__btn:hover {
       background-color: green; }
+  .board__score {
+    display: inline-block;
+    margin-right: auto;
+    font-size: 4rem;
+    background-color: #00330b;
+    color: #c7e979;
+    margin-top: 0; }
+  .board__preview {
+    height: 20rem;
+    display: flex;
+    justify-content: center; }
+  .board__preview-player {
+    align-self: center;
+    margin: 2rem; }
+  .board__preview-AI {
+    align-self: center;
+    margin: 2rem; }
+
+.hidden {
+  display: none; }
+
+.card {
+  margin: 1rem; }
