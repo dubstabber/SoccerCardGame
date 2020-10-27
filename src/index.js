@@ -9,8 +9,6 @@ const scoreStatus = $(".board__score");
 const playerDeck = $(".board__player-deck");
 const AIDeck = $(".board__AI-deck");
 const preview = $(".board__preview");
-const previewPlayer = $(".board__preview-player");
-const previewAI = $(".board__preview-AI");
 let round = 1;
 let playerScore = 0;
 let AIScore = 0;
@@ -139,7 +137,21 @@ function AIattack(){
 
 function clearPreview() {
     preview.empty();
+    if(playerDeck.children().length == 0 && AIDeck.children().length == 0){
+        round++;
+        if(round == 3){
+            if(playerScore > AIScore){
+                console.log("You win!");
+            } else if(playerScore < AIScore) {
+                console.log("You lose!");
+            } else {
+                console.log("Draw!");
+            }
+        } else{
+            pending = false;
+            startGame();
+        }
+    }else
     if(turn == 1) setTimeout(AIattack, 500);
     else pending = false;
-    
 }
