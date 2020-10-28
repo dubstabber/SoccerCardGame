@@ -2,7 +2,8 @@ html {
   font-size: 62.5%; }
 
 body {
-  background-image: url("./img/soccer-bg.jpg"); }
+  background-image: url("./img/soccer-bg.jpg");
+  font-family: sans-serif; }
 
 .container {
   height: 90vh;
@@ -21,7 +22,7 @@ body {
   flex-direction: column;
   box-sizing: border-box; }
   .board__btn {
-    margin: 0.3rem;
+    margin: 0.8rem;
     background-color: #c7e979;
     padding: 1.5rem;
     border: 0.4rem solid #00330b;
@@ -29,29 +30,48 @@ body {
     font-size: 3.4rem;
     color: #10250f;
     text-align: center;
-    letter-spacing: 0.4rem; }
+    letter-spacing: 0.4rem;
+    transition: .1s ease-in-out;
+    cursor: pointer;
+    box-shadow: 0.2rem 0.2rem 2rem; }
     .board__btn:hover {
-      background-color: green; }
+      background-color: green;
+      transform: scale(1.1); }
   .board__score {
     display: inline-block;
     margin-right: auto;
     font-size: 4rem;
     background-color: #00330b;
     color: #c7e979;
-    margin-top: 0; }
+    margin: auto;
+    margin-top: 0;
+    padding: 0.4rem;
+    border-radius: 2rem; }
   .board__preview {
     height: 20rem;
     display: flex;
     justify-content: center; }
   .board__preview-player {
     align-self: center;
-    margin: 2rem; }
+    margin: 2rem;
+    border: 0.2rem solid #00330b;
+    border-radius: 2rem; }
   .board__preview-AI {
     align-self: center;
-    margin: 2rem; }
+    margin: 2rem;
+    border: 0.2rem solid #00330b;
+    border-radius: 2rem; }
 
 .hidden {
   display: none; }
 
 .card {
-  margin: 1rem; }
+  margin: 1rem;
+  border: 0.2rem solid #00330b;
+  border-radius: 2rem;
+  transition: .1s ease-in-out;
+  box-shadow: 0.2rem 0.2rem 2rem; }
+  .card__player {
+    cursor: pointer; }
+  .card__player:hover {
+    transform: scale(1.4); }

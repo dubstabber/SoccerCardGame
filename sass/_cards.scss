@@ -4,4 +4,16 @@
 
 .card {
     margin: 1rem;
+    border: $card-border;
+    border-radius: $card-border-radius;
+    transition: .1s ease-in-out;
+    box-shadow: 0.2rem 0.2rem $card-border-radius;
+    &__player {
+        cursor: pointer;
+    }
+
+    &__player:hover {
+        
+        transform: scale(1.4);
+    }
 }

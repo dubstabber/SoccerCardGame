@@ -20,7 +20,7 @@
     box-sizing: border-box;
     
     &__btn {
-        margin: 0.3rem;
+        margin: 0.8rem;
         background-color: $color-primary;
         padding: 1.5rem;
         border: 0.4rem solid $color-secondary;
@@ -29,9 +29,13 @@
         color: rgb(16, 37, 15);
         text-align: center;
         letter-spacing: 0.4rem;
+        transition: .1s ease-in-out;
+        cursor: pointer;
+        box-shadow: 0.2rem 0.2rem $card-border-radius;
 
         &:hover {
             background-color: green;
+            transform: scale(1.1);
         }
     }
     &__score {
@@ -40,7 +44,10 @@
         font-size: 4rem;
         background-color: $color-secondary;
         color: $color-primary;
+        margin: auto;
         margin-top: 0;
+        padding: 0.4rem;
+        border-radius: 2rem;
     }
 
     &__preview {
@@ -52,10 +59,14 @@
     &__preview-player {
         align-self: center;
         margin: 2rem;
+        border: $card-border;
+        border-radius: $card-border-radius;
     }
     &__preview-AI {
         align-self: center;
         margin: 2rem;
+        border: $card-border;
+        border-radius: $card-border-radius;
     }
 
 
