@@ -15,6 +15,14 @@ body {
     font-size: 7rem;
     color: #4bce67;
     margin-top: 0; }
+  .container__howToPlay {
+    background-color: #00330b;
+    border: 0.2rem solid black;
+    border-radius: 7rem;
+    padding: 3rem;
+    width: 50vw;
+    font-size: 1.6rem;
+    color: #c7e979; }
 
 .board {
   display: flex;

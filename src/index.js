@@ -1,4 +1,4 @@
-const cardsInDeck = 10;
+const maxCards = 10;
 const maxRounds = 2;
 
 const cards = ["attackBlack.jpg", "attackBlue.jpg", "attackBrown.jpg", "attackRed.jpg", "attackGolden.jpg", 
@@ -7,6 +7,7 @@ const board = $(".board");
 const startBtn = $(".board__btn")[0];
 const howToBtn = $(".board__btn")[1];
 const restartBtn = $(".board__btn")[2];
+const backBtn = $(".board__btn")[3];
 const title = $(".container__header");
 const scoreStatus = $(".board__score");
 const playerDeck = $(".board__player-deck");
@@ -23,9 +24,21 @@ $(startBtn).click(() => {
     new Audio("../sfx/click.ogg").play();
 });
 $(howToBtn).click(() => {
-    console.log("Not implemented yet");
+    $(startBtn).addClass("hidden");
+    $(howToBtn).addClass("hidden");
+    $(backBtn).removeClass("hidden");
+    $(".container__howToPlay").removeClass("hidden");
+
     new Audio("../sfx/click.ogg").play();
 });
+$(backBtn).click(() => {
+    $(startBtn).removeClass("hidden");
+    $(howToBtn).removeClass("hidden");
+    $(backBtn).addClass("hidden");
+    $(".container__howToPlay").addClass("hidden");
+    new Audio("../sfx/click.ogg").play();
+});
+
 $(restartBtn).click(() => {
     round = 1;
     playerScore = 0;
@@ -46,13 +59,13 @@ function startGame() {
     title.html("Round "+round);
     scoreStatus.html("Score  "+playerScore+" : "+AIScore);
     let pick;
-    for(let i = 0; i < cardsInDeck; i++){
+    for(let i = 0; i < maxCards; i++){
         pick = Math.floor(Math.random() * cards.length);
         AIDeck.append("<img class='card' src='./img/cardBack.jpg' id='e"+i+"' name='"+pick+"' />");
     }
 
 
-    for(let i = 0; i < cardsInDeck; i++){
+    for(let i = 0; i < maxCards; i++){
         pick = Math.floor(Math.random() * cards.length);
         playerDeck.append("<img class='card card__player' src='./img/"+cards[pick]+"' id='p"+i+"' name='"+pick+"' />")
         $("#p"+i).click(playerTurn)
@@ -161,6 +174,7 @@ function clearPreview() {
     if(playerDeck.children().length == 0 && AIDeck.children().length == 0){
         round++;
         if(round > maxRounds){
+            pending = false;
             playerDeck.addClass("hidden");
             AIDeck.addClass("hidden");
             preview.addClass("hidden");

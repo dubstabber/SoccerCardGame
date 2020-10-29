@@ -10,7 +10,16 @@
         color: $title-color;
         margin-top: 0;
     }
-
+        
+    &__howToPlay {
+        background-color: $color-secondary;
+        border: 0.2rem solid black;
+        border-radius: 7rem; 
+        padding: 3rem;
+        width: 50vw;
+        font-size: $default-font-size;
+        color: $color-primary;
+    }
 }
 
 .board {
@@ -38,6 +47,7 @@
             transform: scale(1.1);
         }
     }
+
     &__score {
         display: inline-block;
         margin-right: auto;
