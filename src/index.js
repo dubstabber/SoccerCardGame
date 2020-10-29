@@ -21,7 +21,7 @@ let pending = false;
 
 $(startBtn).click(() => {
     startGame();
-    new Audio("../sfx/click.ogg").play();
+    new Audio("./sfx/click.ogg").play();
 });
 $(howToBtn).click(() => {
     $(startBtn).addClass("hidden");
@@ -29,14 +29,14 @@ $(howToBtn).click(() => {
     $(backBtn).removeClass("hidden");
     $(".container__howToPlay").removeClass("hidden");
 
-    new Audio("../sfx/click.ogg").play();
+    new Audio("./sfx/click.ogg").play();
 });
 $(backBtn).click(() => {
     $(startBtn).removeClass("hidden");
     $(howToBtn).removeClass("hidden");
     $(backBtn).addClass("hidden");
     $(".container__howToPlay").addClass("hidden");
-    new Audio("../sfx/click.ogg").play();
+    new Audio("./sfx/click.ogg").play();
 });
 
 $(restartBtn).click(() => {
@@ -45,7 +45,7 @@ $(restartBtn).click(() => {
     AIScore = 0;
     startGame();
     $(restartBtn).addClass("hidden");
-    new Audio("../sfx/click.ogg").play();
+    new Audio("./sfx/click.ogg").play();
 });
 
 function startGame() {
@@ -77,7 +77,7 @@ function startGame() {
 
 function playerTurn(e){
     if(turn == 0 && !pending){
-        new Audio("../sfx/kick.mp3").play();
+        new Audio("./sfx/kick.mp3").play();
         preview.append("<img name='"+e.target.name+"' class='board__preview-player' src='./img/"+cards[e.target.name]+"' />");
         $("#"+e.target.id).remove();
         pending = true;
@@ -86,12 +86,12 @@ function playerTurn(e){
 
     if(turn == 1 && !pending){
         preview.append("<img name='"+e.target.name+"' class='board__preview-player' src='./img/"+cards[e.target.name]+"' />");
-        new Audio("../sfx/kick.mp3").play();
+        new Audio("./sfx/kick.mp3").play();
         $("#"+e.target.id).remove();
         let AIcard = parseInt($(".board__preview-AI").attr("name"));
         if(parseInt(e.target.name) !== AIcard +5 && AIcard < 5){
             AIScore++;
-            new Audio("../sfx/goal.ogg").play();
+            new Audio("./sfx/goal.ogg").play();
             scoreStatus.html("Score  "+playerScore+" : "+AIScore);
         }
         pending = true;
@@ -114,7 +114,7 @@ function AIdefend(){
             });
         }
     }
-    new Audio("../sfx/kick.mp3").play();
+    new Audio("./sfx/kick.mp3").play();
     if(!defended) {
         let selected = false;
         AIDeck.children('img').each(function() {
@@ -132,7 +132,7 @@ function AIdefend(){
         }
         if(playerTurn < 5){
             playerScore++;
-            new Audio("../sfx/goal.ogg").play();
+            new Audio("./sfx/goal.ogg").play();
             scoreStatus.html("Score  "+playerScore+" : "+AIScore);
         }
     }
@@ -147,7 +147,7 @@ function AIattack(){
     let allCards = [];
     let cardName;
 
-    new Audio("../sfx/kick.mp3").play();
+    new Audio("./sfx/kick.mp3").play();
     AIDeck.children('img').each(function() {
         allCards.push(this.id);
         if(parseInt(this.name) > -1  && parseInt(this.name) < 5) attackCards.push(this.id);
