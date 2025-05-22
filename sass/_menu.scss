@@ -76,7 +76,8 @@
             margin-top: 1rem;
         }
 
-        /* Add responsiveness for mobile */
+        color: $color-primary;
+
         @media (max-width: 768px) {
             width: 90%;
             padding: 1.5rem;
@@ -90,8 +91,6 @@
                 font-size: 1.5rem;
             }
         }
-
-        color: $color-primary;
     }
 }
 

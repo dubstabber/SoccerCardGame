@@ -2,7 +2,7 @@
   "name": "soccer-card-game",
   "version": "1.0.0",
   "description": "A strategic card game based on soccer, featuring player vs AI gameplay",
-  "main": "src/index.js",
+  "main": "src/main.js",
   "scripts": {
     "start": "serve -s .",
     "lint": "eslint src/**/*.js",
