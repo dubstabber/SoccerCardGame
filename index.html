@@ -1,39 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Soccer Card Game</title>
-        <link rel="icon" type="image/png" href="./favicon.ico"/>
-        <link rel="stylesheet" href="css/styles.css">
-        
-        <script src="./src/jquery-3.5.1.min.js"></script>
-    </head>
-    <body>
-        <div class="container">
-            <h2 class="container__header">Soccer Card Game</h2>
-            <div class="container__howToPlay hidden">
-                <p>You play with the cards at the bottom of the screen.</p>
-                <p>There are two types of them: attacking card and defending card.</p>
-                <p>Each type has 5 different colors: black, blue, brown, red and yellow.</p>
-                <p>In order to score a point you have to click on an attacking card with the desired color.</p>
-                <p>If AI has the defending card in its deck with the same color the player used to attack then no point is scored.</p>
-                <p>Selected cards are being shown on the center.</p>
-                <p>The turns are alternating so if you were an attacker then next time you probably are going to prepare for defending.</p>
-                <p>You have to use an appropriate defending card in order to prevent AI from scoring.</p>
-                <p>Your points are on the left of the Score bar.</p>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soccer Card Game</title>
+    <link rel="icon" type="image/png" href="./favicon.ico" />
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <h2 class="container__header">Soccer Card Game</h2>
+        <div class="container__howToPlay hidden">
+            <h3>How to Play Soccer Card Game</h3>
+
+            <div class="how-to-section">
+                <h4>Game Overview</h4>
+                <p>Soccer Card Game is a turn-based strategic card game where you compete against the AI to score the
+                    most goals.</p>
+                <p>The game is played over <strong>2 rounds</strong>, and the player with the highest score at the end
+                    wins.</p>
             </div>
-            <div class="board">
-                <div class="board__score hidden"></div>
-                <div class="board__AI-deck hidden"></div>
-                <div class="board__preview hidden"></div>
-                <div class="board__player-deck hidden"></div>
-                <div class="board__btn">START</div>
-                <div class="board__btn">How to play</div>
-                <div class="board__btn hidden">Play again</div>
-                <div class="board__btn hidden">Go back</div>
+
+            <div class="how-to-section">
+                <h4>Card Types</h4>
+                <ul>
+                    <li><strong>Attack Cards:</strong> Used to score goals (marked as "attack" on the card)</li>
+                    <li><strong>Goal Cards:</strong> Used to defend against attacks (marked as "goal" on the card)</li>
+                </ul>
+                <p>Each card comes in 5 different colors: Black, Blue, Brown, Red, and Golden.</p>
             </div>
+
+            <div class="how-to-section">
+                <h4>Game Flow</h4>
+                <ol>
+                    <li>You and the AI take turns playing cards - either attacking or defending.</li>
+                    <li>When it's your turn to attack, select an attack card from your hand (bottom of screen).</li>
+                    <li>When it's your turn to defend, select a goal card that matches the color of the AI's attack.
+                    </li>
+                    <li>Cards played are shown in the center of the board.</li>
+                </ol>
+            </div>
+
+            <div class="how-to-section">
+                <h4>Scoring Points</h4>
+                <ul>
+                    <li><strong>To score a goal:</strong> Play an attack card when the AI can't defend with a matching
+                        color goal card.</li>
+                    <li><strong>To prevent the AI from scoring:</strong> Play a goal card with the same color as the
+                        AI's attack card.</li>
+                </ul>
+                <p>The score is displayed at the top of the game board, with your score on the left.</p>
+            </div>
+
+            <p class="tip"><strong>Tip:</strong> Pay attention to which cards the AI has already played to predict if
+                they can defend against certain colors!</p>
         </div>
-        <script src="./src/index.js"></script>
-    </body>
+        <div class="board">
+            <div class="board__score hidden"></div>
+            <div class="board__AI-deck hidden"></div>
+            <div class="board__preview hidden"></div>
+            <div class="board__player-deck hidden"></div>
+            <div class="board__btn">START</div>
+            <div class="board__btn">How to play</div>
+            <div class="board__btn hidden">Play again</div>
+            <div class="board__btn hidden">Go back</div>
+        </div>
+    </div>
+    <script src="./src/main.js" type="module"></script>
+</body>
+
 </html>

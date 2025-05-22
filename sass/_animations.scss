@@ -1,0 +1,101 @@
+@use 'variables' as *;
+
+@keyframes cardMove {
+  0% {
+    transform: scale(0.8);
+    opacity: 0.8;
+  }
+
+  50% {
+    transform: scale(1.1);
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes goalAnimation {
+  0% {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+
+  20% {
+    transform: scale(1.5);
+    opacity: 1;
+  }
+
+  80% {
+    transform: scale(1.5);
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+@keyframes saveAnimation {
+  0% {
+    transform: scale(0.5) rotate(-5deg);
+    opacity: 0;
+  }
+
+  20% {
+    transform: scale(1.2) rotate(5deg);
+    opacity: 1;
+  }
+
+  80% {
+    transform: scale(1.2) rotate(-5deg);
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(1.5) rotate(5deg);
+    opacity: 0;
+  }
+}
+
+.goal-indicator,
+.defense-indicator {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 3rem;
+  font-weight: bold;
+  text-align: center;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  z-index: 100;
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.goal-indicator {
+  color: #ff3b30;
+  animation: goalAnimation 1.5s ease-in-out forwards;
+}
+
+.defense-indicator {
+  color: #34c759;
+  animation: saveAnimation 1.5s ease-in-out forwards;
+}
+
+.card-animation {
+  animation: cardMove 0.3s ease-in-out forwards;
+}
+
+.card__player {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+  }
+}

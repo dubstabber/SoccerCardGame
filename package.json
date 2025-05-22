@@ -1,23 +1,30 @@
 {
-  "name": "soccercardgame",
+  "name": "soccer-card-game",
   "version": "1.0.0",
-  "description": "A soccer themed card game for browsers",
-  "main": "index.html",
+  "description": "A strategic card game based on soccer, featuring player vs AI gameplay",
+  "main": "src/index.js",
   "scripts": {
-    "watch:sass": "node-sass sass/main.scss ./css/styles.css -w",
-    "devserver": "live-server",
-    "compile:sass": "node-sass sass/main.scss css/style.comp.css",
-    "prefix:css": "postcss --use autoprefixer -b \"last 10 versions\" css/style.comp.css -o css/styles.css",
-    "start": "npm-run-all --parallel devserver watch:sass",
-    "build": "npm-run-all compile:sass prefix:css"
+    "start": "serve -s .",
+    "lint": "eslint src/**/*.js",
+    "compile:sass": "sass sass/main.scss:css/styles.css --style compressed",
+    "watch:sass": "sass sass/main.scss:css/styles.css --watch",
+    "build": "npm run compile:sass"
   },
+  "keywords": [
+    "soccer",
+    "cards",
+    "game",
+    "strategy"
+  ],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "autoprefixer": "^10.0.1",
-    "node-sass": "^4.14.1",
+    "autoprefixer": "^10.4.14",
+    "sass": "^1.62.1",
     "npm-run-all": "^4.1.5",
-    "postcss": "^8.1.4",
-    "postcss-cli": "^8.1.0"
+    "postcss": "^8.4.23",
+    "postcss-cli": "^10.1.0",
+    "serve": "^14.2.0",
+    "eslint": "^8.38.0"
   }
 }

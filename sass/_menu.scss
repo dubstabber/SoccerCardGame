@@ -1,6 +1,8 @@
+@use 'variables' as *;
+
 .container {
     height: 90vh;
-    display:flex;
+    display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
@@ -10,24 +12,95 @@
         color: $title-color;
         margin-top: 0;
     }
-        
+
     &__howToPlay {
-        background-color: $color-secondary;
-        border: 0.2rem solid black;
-        border-radius: 7rem; 
-        padding: 3rem;
-        width: 50vw;
-        font-size: $default-font-size;
+        position: absolute;
+        width: 80%;
+        height: 75%;
+        background-color: $color-bg;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        padding: 2rem;
+        border-radius: 2rem;
+        margin: 0 auto;
+        font-size: 1.4rem;
+        text-align: left;
+        overflow-y: auto;
+
+        h3 {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            color: $color-secondary;
+            font-size: 2rem;
+        }
+
+        h4 {
+            color: $color-primary;
+            margin-bottom: 0.8rem;
+            font-size: 1.6rem;
+        }
+
+        .how-to-section {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px dashed rgba($color-secondary, 0.3);
+
+            &:last-child {
+                border-bottom: none;
+            }
+        }
+
+        p {
+            margin: 0.8rem 0;
+            font-weight: 400;
+            line-height: 1.5;
+        }
+
+        ul,
+        ol {
+            padding-left: 2rem;
+            margin: 1rem 0;
+
+            li {
+                margin-bottom: 0.5rem;
+                line-height: 1.5;
+            }
+        }
+
+        .tip {
+            background-color: rgba($color-primary, 0.1);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            border-left: 4px solid $color-primary;
+            margin-top: 1rem;
+        }
+
+        /* Add responsiveness for mobile */
+        @media (max-width: 768px) {
+            width: 90%;
+            padding: 1.5rem;
+            font-size: 1.3rem;
+
+            h3 {
+                font-size: 1.8rem;
+            }
+
+            h4 {
+                font-size: 1.5rem;
+            }
+        }
+
         color: $color-primary;
     }
 }
 
 .board {
-    display:flex;
+    display: flex;
     justify-content: center;
     flex-direction: column;
     box-sizing: border-box;
-    
+
     &__btn {
         margin: 0.8rem;
         background-color: $color-primary;
@@ -72,6 +145,7 @@
         border: $card-border;
         border-radius: $card-border-radius;
     }
+
     &__preview-AI {
         align-self: center;
         margin: 2rem;

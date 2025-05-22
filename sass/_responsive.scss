@@ -1,0 +1,157 @@
+// Media Query Manager
+/*
+0 - 600px:      Phone
+600 - 900px:    Tablet portrait
+900 - 1200px:   Tablet landscape
+1200 - 1800px:  Normal styles
+1800px + :      Big desktop
+*/
+
+$bp-small: 37.5em;
+$bp-medium: 56.25em;
+$bp-large: 75em;
+$bp-xl: 112.5em;
+
+
+@mixin respond($breakpoint) {
+  @if $breakpoint ==phone {
+    @media only screen and (max-width: $bp-small) {
+      @content
+    }
+
+    ;
+  }
+
+  @if $breakpoint ==tab-port {
+    @media only screen and (max-width: $bp-medium) {
+      @content
+    }
+
+    ;
+  }
+
+  @if $breakpoint ==tab-land {
+    @media only screen and (max-width: $bp-large) {
+      @content
+    }
+
+    ;
+  }
+
+  @if $breakpoint ==big-desktop {
+    @media only screen and (min-width: $bp-xl) {
+      @content
+    }
+
+    ;
+  }
+}
+
+.container {
+  @include respond(phone) {
+    height: 100vh;
+    padding: 1rem;
+  }
+
+  &__header {
+    @include respond(phone) {
+      font-size: 4rem;
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+
+    @include respond(tab-port) {
+      font-size: 5rem;
+    }
+  }
+
+  &__howToPlay {
+    @include respond(phone) {
+      width: 90vw;
+      padding: 2rem;
+      border-radius: 2rem;
+      font-size: 1.4rem;
+    }
+
+    @include respond(tab-port) {
+      width: 70vw;
+    }
+  }
+}
+
+.board {
+  @include respond(phone) {
+    width: 100%;
+    padding: 0 1rem;
+  }
+
+  &__btn {
+    @include respond(phone) {
+      font-size: 2.2rem;
+      padding: 1rem;
+      margin: 0.5rem;
+      letter-spacing: 0.2rem;
+    }
+
+    @include respond(tab-port) {
+      font-size: 2.8rem;
+    }
+  }
+
+  &__score {
+    @include respond(phone) {
+      font-size: 2.5rem;
+    }
+  }
+
+  &__preview {
+    @include respond(phone) {
+      height: 15rem;
+    }
+  }
+
+  &__preview-player,
+  &__preview-AI {
+    @include respond(phone) {
+      margin: 0.5rem;
+      max-height: 12rem;
+      max-width: 35%;
+      transform-origin: center;
+      transition: transform 0.3s ease;
+
+      &:active {
+        transform: scale(0.95);
+      }
+    }
+  }
+
+  &__player-deck,
+  &__AI-deck {
+    @include respond(phone) {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      max-width: 100%;
+      overflow-x: auto;
+      padding-bottom: 1rem;
+    }
+  }
+}
+
+.card {
+  @include respond(phone) {
+    margin: 0.5rem;
+    max-width: 4rem;
+    max-height: 5.5rem;
+  }
+
+  @include respond(tab-port) {
+    max-width: 7rem;
+  }
+
+  &__player:hover {
+    @include respond(phone) {
+      transform: scale(1.2);
+    }
+  }
+}
