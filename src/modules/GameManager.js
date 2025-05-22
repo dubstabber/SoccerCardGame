@@ -5,7 +5,7 @@ import { AssetLoader } from './AssetLoader.js';
 export class GameManager {
   constructor(config = {}) {
     this.maxCards = config.maxCards || 10;
-    this.maxRounds = config.maxRounds || 3;
+    this.maxRounds = config.maxRounds || 2;
     this.round = 1;
     this.playerScore = 0;
     this.aiScore = 0;
@@ -14,10 +14,8 @@ export class GameManager {
     this.gameInitialized = false;
 
     this.cacheElements();
-
     this.assetLoader = new AssetLoader();
     this.audio = new AudioManager(this.assetLoader);
-
     this.playerDeck = null;
     this.aiDeck = null;
 
@@ -193,81 +191,42 @@ export class GameManager {
   }
 
   handlePlayerTurn(e) {
+    if (this.pending) return;
+
     const { preview, scoreStatus } = this.elements;
     const cardElement = e.target;
-    const cardName = cardElement.getAttribute('name');
-    const cardType = cardElement.getAttribute('data-type');
-    const cardColor = cardElement.getAttribute('data-color');
 
-    if (this.turn === 0 && !this.pending) {
-      this.audio.playSound('kick');
-      const previewCard = document.createElement('img');
-      previewCard.className = 'board__preview-player';
-      previewCard.src = cardElement.src;
+    const cardData = {
+      name: cardElement.getAttribute('name'),
+      type: cardElement.getAttribute('data-type'),
+      color: cardElement.getAttribute('data-color'),
+      src: cardElement.src
+    };
 
-      previewCard.setAttribute('name', cardName);
-      previewCard.setAttribute('data-type', cardType);
-      previewCard.setAttribute('data-color', cardColor);
-      previewCard.classList.add('card-played');
-      preview.appendChild(previewCard);
+    this.audio.playSound('kick');
 
-      cardElement.remove();
+    const previewCard = this.createPreviewCard(cardData, 'board__preview-player');
+    preview.appendChild(previewCard);
+    cardElement.remove();
 
+    if (this.turn === 0) {
       this.pending = true;
-
       setTimeout(() => this.aiDefend(), 1000);
-    }
-
-    if (this.turn === 1 && !this.pending) {
-      const previewCard = document.createElement('img');
-      previewCard.className = 'board__preview-player';
-      previewCard.src = cardElement.src;
-      previewCard.setAttribute('name', cardName);
-      previewCard.setAttribute('data-type', cardType);
-      previewCard.setAttribute('data-color', cardColor);
-      previewCard.classList.add('card-animation');
-      preview.appendChild(previewCard);
-
-      this.audio.playSound('kick');
-      cardElement.remove();
-
+    } else {
       const aiCard = preview.querySelector('.board__preview-AI');
       const aiCardType = aiCard.getAttribute('data-type');
       const aiCardColor = aiCard.getAttribute('data-color');
       const successfulDefense = aiCardType === 'attack' &&
-        cardType === 'goal' &&
-        aiCardColor === cardColor;
+        cardData.type === 'goal' &&
+        aiCardColor === cardData.color;
 
       if (aiCardType === 'attack' && !successfulDefense) {
-        const goalIndicator = document.createElement('div');
-        goalIndicator.className = 'goal-indicator';
-        goalIndicator.textContent = 'GOAL!';
-        preview.appendChild(goalIndicator);
-
         this.aiScore++;
         this.audio.playSound('goal');
         scoreStatus.textContent = `Score  ${this.playerScore} : ${this.aiScore}`;
-        setTimeout(() => {
-          if (goalIndicator.parentNode) {
-            goalIndicator.remove();
-          }
-        }, 1500);
+        this.showIndicator('GOAL!', 'goal-indicator', preview);
       } else if (successfulDefense) {
-        const defenseIndicator = document.createElement('div');
-        defenseIndicator.className = 'defense-indicator';
-        defenseIndicator.textContent = 'SAVED!';
-        preview.appendChild(defenseIndicator);
-
-        setTimeout(() => {
-          if (defenseIndicator.parentNode) {
-            defenseIndicator.remove();
-          }
-        }, 1500);
-        setTimeout(() => {
-          if (defenseIndicator.parentNode) {
-            defenseIndicator.remove();
-          }
-        }, 1500);
+        this.showIndicator('SAVED!', 'defense-indicator', preview);
       }
 
       this.pending = true;
@@ -276,13 +235,41 @@ export class GameManager {
     }
   }
 
+  createPreviewCard(cardData, className) {
+    const previewCard = document.createElement('img');
+    previewCard.className = className;
+    previewCard.src = cardData.src;
+    previewCard.setAttribute('name', cardData.name);
+    previewCard.setAttribute('data-type', cardData.type);
+    previewCard.setAttribute('data-color', cardData.color);
+
+    previewCard.classList.add(this.turn === 0 ? 'card-played' : 'card-animation');
+
+    return previewCard;
+  }
+
+  showIndicator(text, className, container) {
+    const indicator = document.createElement('div');
+    indicator.className = className;
+    indicator.textContent = text;
+    container.appendChild(indicator);
+
+    setTimeout(() => {
+      if (indicator.parentNode) {
+        indicator.remove();
+      }
+    }, 1500);
+  }
+
   aiDefend() {
     const { preview, scoreStatus } = this.elements;
+
     const playerCard = preview.querySelector('.board__preview-player');
     const playerCardType = playerCard.getAttribute('data-type');
     const playerCardColor = playerCard.getAttribute('data-color');
 
     let defended = false;
+    this.audio.playSound('kick');
 
     if (playerCardType === 'attack') {
       const defenseCard = this.aiDeck.findDefenseCard(playerCardColor);
@@ -291,8 +278,6 @@ export class GameManager {
         this.aiDeck.playCard(defenseCard, preview, 'board__preview-AI');
       }
     }
-
-    this.audio.playSound('kick');
 
     if (!defended) {
       const goalCard = this.aiDeck.findAnyGoalCard();
@@ -307,6 +292,7 @@ export class GameManager {
         this.playerScore++;
         this.audio.playSound('goal');
         scoreStatus.textContent = `Score  ${this.playerScore} : ${this.aiScore}`;
+        this.showIndicator('GOAL!', 'goal-indicator', preview);
       }
     }
 
@@ -318,37 +304,31 @@ export class GameManager {
   aiAttack() {
     const { preview } = this.elements;
     this.audio.playSound('kick');
+
     const attackCard = this.aiDeck.findAnyAttackCard();
+
     if (attackCard) {
       this.aiDeck.playCard(attackCard, preview, 'board__preview-AI');
     } else {
       const anyCard = this.aiDeck.getFirstCard();
       this.aiDeck.playCard(anyCard, preview, 'board__preview-AI');
     }
+
     this.pending = false;
   }
 
   clearPreview() {
-    const { preview, playerDeck, aiDeck, title, scoreStatus, restartBtn } = this.elements;
+    const { preview, playerDeck, aiDeck } = this.elements;
+
     preview.innerHTML = '';
 
-    if (playerDeck.children.length === 0 && aiDeck.children.length === 0) {
+    const roundOver = playerDeck.children.length === 0 && aiDeck.children.length === 0;
+
+    if (roundOver) {
       this.round++;
 
       if (this.round > this.maxRounds) {
-        this.pending = false;
-        playerDeck.classList.add('hidden');
-        aiDeck.classList.add('hidden');
-        preview.classList.add('hidden');
-        scoreStatus.textContent = `Final Score  ${this.playerScore} : ${this.aiScore}`;
-        if (this.playerScore > this.aiScore) {
-          title.textContent = 'You win! 🏆';
-        } else if (this.playerScore < this.aiScore) {
-          title.textContent = 'You lose! 😢';
-        } else {
-          title.textContent = 'It\'s a draw! 🤝';
-        }
-        restartBtn.classList.remove('hidden');
+        this.endGame();
       } else {
         this.pending = false;
         this.startGame();
@@ -360,5 +340,24 @@ export class GameManager {
         this.pending = false;
       }
     }
+  }
+
+  endGame() {
+    const { playerDeck, aiDeck, preview, title, scoreStatus, restartBtn } = this.elements;
+
+    playerDeck.classList.add('hidden');
+    aiDeck.classList.add('hidden');
+    preview.classList.add('hidden');
+    scoreStatus.textContent = `Final Score  ${this.playerScore} : ${this.aiScore}`;
+    if (this.playerScore > this.aiScore) {
+      title.textContent = 'You win! 🏆';
+    } else if (this.playerScore < this.aiScore) {
+      title.textContent = 'You lose! 😢';
+    } else {
+      title.textContent = 'It\'s a draw! 🤝';
+    }
+
+    restartBtn.classList.remove('hidden');
+    this.pending = false;
   }
 }
